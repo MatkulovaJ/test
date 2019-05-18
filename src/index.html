@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>	
+<html>
+<head>	
+    <meta charset="UTF-8">	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">	
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">	
+    <title>Тест</title>	
+
+     <link rel="stylesheet" href="../css/style.css">	
+    <script src="../js/main.js"></script>	
+</head>	
+<body style="background-color:greenyellow">	
+<script>	
+    var title = 'Тест';	
+  	
+    var questions=[	
+    {	
+        text: "Самая высокая гора в мире?",	
+        answers: ["Джомолунгма",	
+              "Канченджанга",	
+              "Чогори"],	
+        correctAnswer: 0 	
+    },	
+    {	
+        text: "Самая большая пустыня в мире?",	
+        answers: ["Сахара",	
+              "Антарктическая пустыня",	
+              "	Арктическая пустыня"],	
+        correctAnswer: 1	
+    },	
+    {	
+        text: "Самая длинная река?",	
+        answers: ["Нил",	
+              "Амазонка",	
+              "Янцзы    "],	
+        correctAnswer: 0	
+    }	
+    ];	
+    	
+    var yourAns = new Array;	
+    var score = 0;	
+    	
+    function Engine(question, answer) {yourAns[question]=answer;}	
+    	
+    function Score(){	
+       var answerText = "Результаты:\n";	
+       for(var i = 0; i < yourAns.length; ++i){	
+        var num = i+1;	
+        answerText=answerText+"\n    Вопрос №"+ num +"";	
+        if(yourAns[i]!=questions[i].correctAnswer){	
+            answerText=answerText+"\n    Правильный ответ: " +	
+            questions[i].answers[questions[i].correctAnswer] + "\n";	
+          }	
+            else{	
+            answerText=answerText+": Верно! \n";	
+            ++score;	
+            }	
+           }	
+    	
+       answerText=answerText+"\nВсего правильных ответов: "+score+"\n";	
+    	
+       alert(answerText);	
+       yourAns = [];	
+       score = 0;	
+       clearForm("quiz");	
+    }	
+    function clearForm(name) {	
+       var f = document.forms[name];	
+       for(var i = 0; i < f.elements.length; ++i) {	
+        if(f.elements[i].checked)	
+            f.elements[i].checked = false;	
+    }	
+    }	
+    </script>	
+
+     <style>	
+    span.quest {font-weight: bold;}	
+    </style>	
+
+     <h1><script>document.write(title)</script></h1>	
+    <h2><script>document.write(subtitle)</script></h2>	
+
+     <form name="quiz">	
+    <ol>	
+    <script>	
+    for(var q=0; q<questions.length; ++q) {	
+       var question = questions[q];	
+       var idx = 1 + q;	
+    	
+       document.writeln('<li><span class="quest">' + question.text + '</span><br/>');	
+       for(var i in question.answers) {	
+        document.writeln('<input type=radio name="q' + idx + '" value="' + i +	
+        '" onClick="Engine(' + q + ', this.value)">' + question.answers[i] + '<br/>');	
+    }	
+    }	
+    </script>	
+    </ol>	
+    <input type="button" onClick="Score()" value="Проверить результаты" />	
+
+     </form>	
+    </body>		
